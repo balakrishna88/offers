@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}Top Products{% endblock %}
+
+{% block content %}
+
+<div class="w-36 bg-gray-50 border border-gray-200 rounded-lg p-3 shadow hover:shadow-lg text-center">
+  <!-- Product Image -->
+  <img src="https://m.media-amazon.com/images/I/51jc50L+tAL._AC_UY218_.jpg" 
+       alt="Noise Smart Watch" 
+       class="mx-auto h-16 object-contain mb-2">
+
+  <!-- Product Title -->
+  <p class="text-xs font-semibold h-10 overflow-hidden mb-2">
+    Noise ColorFit Icon 2 Smart Watch
+  </p>
+
+  <!-- Prices -->
+  <div class="flex flex-col mb-2">
+    <span class="text-gray-400 line-through text-[9px]">₹2,999</span>
+    <span class="text-sm font-bold text-gray-900">₹1,499</span>
+    <span class="text-green-600 text-[9px] font-semibold">₹1,500 OFF</span>
+  </div>
+
+  <!-- Buy Button -->
+  <a href="https://www.amazon.in" target="_blank"
+     class="w-full inline-block bg-black text-white text-sm font-semibold py-2 rounded-md shadow hover:bg-gray-800 transition">
+    Buy Now
+  </a>
+
+  <!-- Marketplace Logo -->
+  <div class="flex justify-center mt-2">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" 
+         alt="Amazon" class="h-5">
+  </div>
+</div>
+
+
+  <h1 class="text-3xl font-bold mb-6">Top Products by Category</h1>
+
+  {% for category, products in categories.items %}
+    <h2 class="text-2xl font-semibold mt-10 mb-4">{{ category|title }}</h2>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      {% for product in products %}
+      <div class="border rounded-xl p-4 shadow-sm text-center hover:shadow-md transition">
+        {% if product.image %}
+          <img src="{{ product.image }}" alt="{{ product.title }}" class="mx-auto max-h-32 object-contain mb-3">
+        {% endif %}
+
+        <p class="text-sm font-medium mb-2">{{ product.title|truncatechars:60 }}</p>
+
+        <p class="text-gray-400 line-through">₹{{ product.previous_price }}</p>
+        <p class="text-lg font-semibold text-gray-800">Now: ₹{{ product.current_price }}</p>
+        <p class="text-green-600 font-bold">Dropped by ₹{{ product.price_drop|floatformat:2 }}</p>
+
+        <a href="{{ product.affiliate_url|default:product.url }}" 
+           target="_blank" 
+           class="mt-3 inline-block bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+           View
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+  {% endfor %}
+{% endblock %}

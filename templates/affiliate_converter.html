@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Affiliate URL Converter{% endblock %}
+
+{% block content %}
+<div class="max-w-md mx-auto mt-10 p-6 bg-white shadow rounded">
+    <h2 class="text-lg font-bold mb-4 text-center">Affiliate URL Converter</h2>
+
+    <form method="post" class="flex flex-col gap-4">
+        {% csrf_token %}
+        <input type="url" name="url" placeholder="Paste Amazon or Flipkart URL here"
+               class="border rounded p-2 w-full" required>
+
+        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+            Convert
+        </button>
+    </form>
+
+    {% if result_url %}
+    <div class="mt-4">
+        <label class="font-semibold mb-1 block">Converted Affiliate URL:</label>
+        <input type="text" value="{{ result_url }}" readonly
+               class="border rounded p-2 w-full text-sm" id="affiliateUrl">
+
+        <button onclick="copyUrl()" class="mt-2 bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700">
+            Copy
+        </button>
+    </div>
+    {% endif %}
+</div>
+
+<script>
+function copyUrl() {
+    const input = document.getElementById('affiliateUrl');
+    input.select();
+    input.setSelectionRange(0, 99999);
+    document.execCommand('copy');
+    alert('Copied to clipboard!');
+}
+</script>
+{% endblock %}

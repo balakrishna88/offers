@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}All Categories{% endblock %}
+{% block content %}
+<h2>All Categories</h2>
+<ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
+  {% for cat in all_categories %}
+    <li class="bg-gray-100 p-2 rounded">{{ cat }}</li>
+  {% endfor %}
+</ul>
+{% endblock %}

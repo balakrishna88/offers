@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Trending Products</title>
+</head>
+<body>
+    <h1>Trending Products</h1>
+
+    {% if post_status %}
+        <p><strong>POST Status:</strong> {{ post_status }}</p>
+    {% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Post Trending Products</button>
+    </form>
+
+    <table border="1" cellpadding="5" cellspacing="0">
+        <thead>
+            <tr>
+                <th>Marketplace</th>
+                <th>Category</th>
+                <th>Title</th>
+                <th>Current Price</th>
+                <th>Previous Price</th>
+                <th>Price Drop</th>
+                <th>Image</th>
+                <th>Link</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for p in products %}
+            <tr>
+                <td>{{ p.marketplace }}</td>
+                <td>{{ p.category }}</td>
+                <td>{{ p.title }}</td>
+                <td>{{ p.current_price }}</td>
+                <td>{{ p.previous_price }}</td>
+                <td>{{ p.price_drop }}</td>
+                <td>
+                    {% if p.image %}
+                        <img src="{{ p.image }}" width="50" />
+                    {% endif %}
+                </td>
+                <td><a href="{{ p.affiliate_url|default:p.url }}" target="_blank">View</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

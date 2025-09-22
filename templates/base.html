@@ -1,0 +1,70 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Dussera Offers 2025 | Amazon & Flipkart Big Billion Deals{% endblock %}</title>
+
+    <!-- Primary SEO Meta -->
+    <meta name="description" content="Grab the best Dussera 2025 deals on Amazon & Flipkart! Big Billion Days, Great India Festival offers, top discounts on electronics, smartphones, appliances, fashion & more.">
+    <meta name="keywords" content="Amazon offers 2025, Flipkart deals 2025, Big Billion Days, Great India Festival, Dussera sale 2025, smartphones, electronics, kitchen appliances, fashion deals, Amazon sale, Flipkart sale">
+    <meta name="author" content="YourSiteName">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:title" content="Dussera Offers 2025 | Amazon & Flipkart Big Billion Deals">
+    <meta property="og:description" content="Grab the best Dussera 2025 deals on Amazon & Flipkart! Discounts on electronics, smartphones, appliances, fashion & more.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ request.build_absolute_uri }}">
+    <meta property="og:image" content="{% static 'images/seo-banner.png' %}">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Dussera Offers 2025 | Amazon & Flipkart Big Billion Deals">
+    <meta name="twitter:description" content="Grab the best Dussera 2025 deals on Amazon & Flipkart! Discounts on electronics, smartphones, appliances, fashion & more.">
+    <meta name="twitter:image" content="{% static 'images/seo-banner.png' %}">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="{% static 'images/favicon.png' %}">
+
+    <!-- Tailwind CSS -->
+    <link href="{% static 'css/src/output.css' %}" rel="stylesheet" />
+    
+
+    {% block head %}{% endblock %}
+</head>
+<body class="bg-gray-100 text-gray-900 min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="bg-white shadow py-3 px-4">
+        <h1 class="text-lg font-bold">Indian Festival Offers 2025 | Dussera 2025 Deals</h1>
+    </header>
+
+    <!-- Navbar -->
+    <main class="flex-1 px-4 py-6">
+        <nav class="bg-white shadow rounded mb-4 px-4 py-2 overflow-x-auto flex gap-3 scrollbar-hide">
+            <a href="/" class="px-4 py-1 rounded-full bg-gray-600 text-white text-xs font-semibold hover:bg-gray-700 transition-shadow shadow-sm whitespace-nowrap">
+    🏠 Home
+</a>
+            <a href="/category/?category=smartphones" class="px-4 py-1 rounded-full bg-blue-600 text-white text-xs font-semibold hover:bg-blue-700 transition-shadow shadow-sm whitespace-nowrap">Smartphones</a>
+            <a href="/category/?category=refrigerator" class="px-4 py-1 rounded-full bg-yellow-600 text-white text-xs font-semibold hover:bg-yellow-700 transition-shadow shadow-sm whitespace-nowrap">Refrigerators</a>
+            <a href="/category/?category=tv" class="px-4 py-1 rounded-full bg-purple-600 text-white text-xs font-semibold hover:bg-purple-700 transition-shadow shadow-sm whitespace-nowrap">Televisions</a>
+            <a href="/category/?category=men" class="px-4 py-1 rounded-full bg-green-600 text-white text-xs font-semibold hover:bg-green-700 transition-shadow shadow-sm whitespace-nowrap">Men's Fashion</a>
+            <a href="/category/?category=women" class="px-4 py-1 rounded-full bg-green-500 text-white text-xs font-semibold hover:bg-green-600 transition-shadow shadow-sm whitespace-nowrap">Women's Fashion</a>
+            <a href="/category/?category=baby" class="px-4 py-1 rounded-full bg-green-400 text-white text-xs font-semibold hover:bg-green-500 transition-shadow shadow-sm whitespace-nowrap">Baby</a>
+            <a href="/category/?category=kids" class="px-4 py-1 rounded-full bg-yellow-500 text-white text-xs font-semibold hover:bg-yellow-600 transition-shadow shadow-sm whitespace-nowrap">Kids</a>
+            <a href="/category/?category=electronics" class="px-4 py-1 rounded-full bg-red-600 text-white text-xs font-semibold hover:bg-red-700 transition-shadow shadow-sm whitespace-nowrap">Electronics</a>
+            <a href="/category/?category=accessories" class="px-4 py-1 rounded-full bg-orange-500 text-white text-xs font-semibold hover:bg-orange-600 transition-shadow shadow-sm whitespace-nowrap">Accessories</a>
+            <a href="/category/?category=kitchen" class="px-4 py-1 rounded-full bg-indigo-600 text-white text-xs font-semibold hover:bg-indigo-700 transition-shadow shadow-sm whitespace-nowrap">Kitchen</a>
+            <a href="/category/?category=appliances" class="px-4 py-1 rounded-full bg-pink-500 text-white text-xs font-semibold hover:bg-pink-600 transition-shadow shadow-sm whitespace-nowrap">Appliances</a>
+            <a href="/category/?category=books" class="px-4 py-1 rounded-full bg-teal-600 text-white text-xs font-semibold hover:bg-teal-700 transition-shadow shadow-sm whitespace-nowrap">Books</a>
+        </nav>
+
+        {% block content %}{% endblock %}
+    </main>
+
+    {% block scripts %}{% endblock %}
+
+</body>
+</html>

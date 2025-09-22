@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+
+{% block title %}Top Products{% endblock %}
+{% block content %}
+
+<div class="mb-4 flex flex-wrap gap-2">
+  {% for subcat in subcategories %}
+    <a href="{% url 'category' %}?category={{ subcat|urlencode }}" 
+       class="px-3 py-1 bg-gray-200 rounded-full text-sm hover:bg-gray-300 transition">
+       {{ subcat|title }}
+    </a>
+  {% endfor %}
+</div>
+
+
+<!-- Main Two-Column Layout -->
+<div class="flex flex-col lg:flex-row gap-6">
+
+  <!-- Left Column: Products (70%) -->
+  <div class="flex flex-col gap-6 lg:[width:70%]">
+
+    <!-- Smartphones Section -->
+<section class="bg-white rounded-lg shadow p-4">
+  <h2 class="text-lg font-bold mb-4">{{ category_name }}</h2>
+
+  <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2">
+
+    <!-- Product Card -->
+    {% for product in products %}
+      <div class="bg-gray-50 border border-gray-200 rounded-lg p-2 shadow hover:shadow-md text-center w-36 mx-auto">
+        <img src="{{ product.image }}" alt="{{ product.title }}" class="mx-auto h-16 object-contain mb-2 rounded-lg">
+        <div class="h-12 flex items-center justify-center mb-2">
+          <p class="text-[10px] font-semibold text-center line-clamp-2">{{ product.title }}</p>
+        </div>
+        <div class="flex flex-col mb-2 text-[9px] gap-1">
+          <span class="inline-block bg-gray-200 text-gray-800 px-1 rounded">🏷️ Regular: ₹{{ product.previous_price|floatformat:0 }}</span>
+          <span class="text-sm font-bold text-gray-900">💰 Deal: ₹{{ product.current_price|floatformat:0 }}</span>
+          <span class="inline-block bg-green-500 text-white font-bold text-[10px] px-2 py-0.5 rounded">🎉 Save ₹{{ product.price_drop|floatformat:0 }} Today!</span>
+        </div>
+        <a href="{{ product.affiliate_url|default:product.url }}" target="_blank" class="w-full block bg-black text-white text-xs font-semibold py-1 rounded hover:bg-gray-800 transition">🛒 Buy</a>
+        
+        <div class="flex justify-center mt-2">
+          {% load static %}
+          {% if product.marketplace == 'amazon' %}
+            <img src="{% static 'images/Amazon-Logo.png' %}" alt="Amazon" class="h-4">
+          {% elif product.marketplace == 'flipkart' %}
+            <img src="{% static 'images/Flipkart-Logo.png' %}" alt="Flipkart" class="h-4">
+          {% endif %}
+        </div>
+      </div>
+    {% endfor %}
+
+  </div>
+</section>
+
+<div class="flex justify-center mt-4 gap-2">
+    {% if products.has_previous %}
+        <a href="?category={{ main_category }}&page={{ products.previous_page_number }}" class="px-2 py-1 bg-gray-200 rounded hover:bg-gray-300">&laquo; Prev</a>
+    {% endif %}
+
+    {% for num in products.paginator.page_range %}
+        {% if num == products.number %}
+            <span class="px-2 py-1 bg-blue-600 text-white rounded">{{ num }}</span>
+        {% else %}
+            <a href="?category={{ main_category }}&page={{ num }}" class="px-2 py-1 bg-gray-200 rounded hover:bg-gray-300">{{ num }}</a>
+        {% endif %}
+    {% endfor %}
+
+    {% if products.has_next %}
+        <a href="?category={{ main_category }}&page={{ products.next_page_number }}" class="px-2 py-1 bg-gray-200 rounded hover:bg-gray-300">Next &raquo;</a>
+    {% endif %}
+</div>
+
+
+    
+
+  </div>
+
+  <!-- Right Column: Banners / Promotions (30%) -->
+  <div class="flex flex-col gap-4 lg:[width:30%]">
+
+
+    <a href="/affiliate/" target="_blank" class="block">
+      <div class="bg-white p-4 rounded-lg shadow text-center hover:shadow-md transition font-semibold text-gray-800">
+        🔍 Link Generator
+      </div>
+    </a>
+
+    <a href="https://dl.flipkart.com/dl/?affid=jbalakris" target="_blank" class="block">
+      <div class="bg-white p-4 rounded-lg shadow text-center hover:shadow-md transition">
+        <img src="{% static 'images/flipkart-logo.png' %}" alt="Flipkart" class="mx-auto h-6">
+      </div>
+    </a>
+
+
+
+    <a href="https://amzn.to/4nLwAnG" target="_blank" class="block">
+      <div class="bg-white p-4 rounded-lg shadow text-center hover:shadow-md transition">
+        <img src="{% static 'images/amazon-logo.png' %}" alt="Amazon" class="mx-auto h-6">
+      </div>
+    </a>
+
+  </div>
+
+</div>
+
+{% endblock %}
